@@ -165,23 +165,6 @@
             <div id="countdown"></div>
         </div>
 
-        <!-- Quran Reading Section -->
-        <div id="quran" class="section">
-            <h2>📖 Quran Reading</h2>
-            <div class="quran-container">
-                <label for="juz">Select Juz:</label>
-                <select id="juz" onchange="openQuran()"></select>
-
-                <iframe id="quran-viewer"></iframe>
-
-                <div class="quran-controls">
-                    <button onclick="prevJuz()">⬅️ Previous</button>
-                    <button onclick="nextJuz()">Next ➡️</button>
-                </div>
-
-               </div>
-        </div>
-
         <!-- Wazaif Section -->
         <div id="wazaif" class="section">
             <h2>🤲 Daily Wazaif</h2>
@@ -359,52 +342,7 @@ function sendChandMubarakNotification(hijriMonth) {
             document.getElementById("date").textContent = today.toDateString();
         }
 
-        
-        function populateJuz() {
-    const juzNames = [
-       "الم", "سیقول", "تلک الرسل", "لن تنالوا", "والمحصنات", "لايحب-الله", "و اذا سمعوا",  "و لو اننا","قَالَ ٱلْمَلَأُ", "و اعلموا", "یعتذرون", "و ما من دابہ", "و ما ابریء", "ربما", "سبحان الذی", "قال ألم", "اقتربت", "قد افلح المؤمنون", "و قال الذین", "أمّن خلق", "اتل ما أوحی", "و من یقنت", "و ما لی", "فمن أظلم", "الیہ یردّ", "حٰمٓ", "قال فما خطبکم", "قد سمع اللّٰہ", "تبارک الذی", "عمّ یتساءلون"
-    ];
     
-    let juzDropdown = document.getElementById("juz");
-    juzDropdown.innerHTML = ""; // Clear previous options
-
-    juzNames.forEach((name, index) => {
-        let option = document.createElement("option");
-        option.value = `${index + 1}`;  // Only store Juz number
-        option.textContent = `Juz ${index + 1} - ${name}`;
-        juzDropdown.appendChild(option);
-    });
-
-    // Update Quran Viewer when selection changes
-    juzDropdown.addEventListener("change", openQuran);
-}
-
-function openQuran() {
-    let juzNumber = document.getElementById("juz").value;
-    if (juzNumber) {
-        document.getElementById("quran-viewer").src = `Juz/Juz${juzNumber}.pdf`; // Corrected path
-    }
-}
-
-// Function to navigate to previous Juz
-function prevJuz() {
-    let juzDropdown = document.getElementById("juz");
-    if (juzDropdown.selectedIndex > 0) {
-        juzDropdown.selectedIndex--;
-        openQuran();
-    }
-}
-
-// Function to navigate to next Juz
-function nextJuz() {
-    let juzDropdown = document.getElementById("juz");
-    if (juzDropdown.selectedIndex < juzDropdown.options.length - 1) {
-        juzDropdown.selectedIndex++;
-        openQuran();
-    }
-}
-
-
      function updateWazaif() {
             let wazaif = ["Recite Surah Yaseen", "Recite Ayat-ul-Kursi", "Recite 100 times Astaghfar", "Recite Surah Ikhlas 11 times", "Recite La Ilaha Illallah 200 times"];
             document.getElementById("wazaif-list").innerHTML = wazaif.map(wazifa => `<li>${wazifa}</li>`).join('');
